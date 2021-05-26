@@ -8,7 +8,6 @@ def call(def context, String repo, String branch, String path) {
             [$class: 'RelativeTargetDirectory', relativeTargetDir: "$path"]],
             submoduleCfg: [],
         userRemoteConfigs: [[
-            credentialsId: 'access-to-ghcr',
             url: "$repo"]]
     ])
 }

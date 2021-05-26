@@ -1,15 +1,11 @@
 def call(def context, String repo, String branch, String path) {
     echo "||------ CLONING $repo into $path------||"
-    context.checkout([
-        $class: 'GitSCM',
-        branches: [[name: "$branch"]],
-        doGenerateSubmoduleConfigurations: false,
-        extensions: [
-            [$class: 'RelativeTargetDirectory', relativeTargetDir: "$path"]],
-            submoduleCfg: [],
-        userRemoteConfigs: [[
-            url: "$repo"]]
-    ])
+    dir(path){
+        context.git branch: branch,
+            changelog: false,
+            poll: false,
+            url: repo
+    }
 }
 //
 //        sh("""
